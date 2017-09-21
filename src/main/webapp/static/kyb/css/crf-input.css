@@ -1,0 +1,330 @@
+﻿html {
+    background: #FFFFFF url('/content/stilearn/img/noise.png');
+}
+
+/*CRF数据录入*/
+.crfform {
+    /*overflow-x:hidden;*/
+}
+
+    .crfform .crfroot {
+        margin: 0;
+        padding: 0 5px 5px 5px;
+    }
+
+    .crfform .crftablerow {
+        margin: 0 auto;
+        padding: 0 5px 5px 5px;
+        clear: both;
+    }
+
+.crf-header {
+    position: fixed;
+    padding: 0px 10px;
+    height: 36px;
+    top: 0px;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    text-align: right;
+    margin: 0px;
+    background-color: #FDFDFD;
+    border-bottom: 1px solid #ddd;
+    z-index: 11;
+}
+
+.crf-header > .crf-breadcrumb{
+    padding: 8px 10px;
+    margin: 0 0 20px;
+    list-style: none;
+    background-color:transparent;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.crf-header > .crf-button{
+    padding: 5px 10px;
+    margin: 0 0 20px;
+    list-style: none;
+    background-color:transparent;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+}
+
+.crf-footer {
+    position: absolute;
+    padding: 6px 10px 6px 0;
+    bottom: 0;
+    margin: 1px;
+    right: 0;
+    left: 0;
+    overflow: hidden;
+    text-align: right;
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+}
+
+.crfform .crf-title {
+    padding: 3px;
+    margin: 0px;
+    line-height: 20px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    color: #217dc0;
+    background: #f3f3f3;
+}
+
+.crfgroup-emptybox {
+    border: 1px solid #fff;
+    border-collapse: separate;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin: 8px 5px;
+}
+
+.crfgroup-box {
+    border: 1px solid #ddd;
+    border-collapse: separate;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    margin: 8px 0px;
+}
+
+.crfgroup-box-noborder {
+    border: 0px;
+}
+
+.crfform .crfgroup-title {
+    padding: 3px;
+    margin: 0px;
+    line-height: 20px;
+    border-bottom: 1px solid #ccc;
+    font-weight: bold;
+    color: #217dc0;
+}
+
+.crfform .crftable-title {
+    padding: 3px;
+    margin: 0px;
+    line-height: 20px;
+    font-weight: bold;
+}
+
+.crfform .crfgroup {
+    padding: 6px 11px 6px 11px;
+}
+
+/*group css*/
+.crfform .crfgroup-box {
+    padding: 0 5px;
+}
+
+/*table css*/
+.crfform .crftable table td {
+    vertical-align: middle;
+}
+
+.crfform .crftable-edit table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.crfform table thead td {
+    font-weight: bold;
+    text-align: center;
+    padding: 3px;
+    vertical-align: middle;
+    background-color: #fafafa;
+}
+
+.table-crfform {
+    margin: 5px 0;
+}
+
+    .table-crfform .td-label {
+        font-family:"Microsoft Yahei","YouYuan","Helvetica","黑体", verdana,sans-serif;
+        vertical-align: top;
+        padding: 7px 10px 0 0;
+        line-height: normal;
+        margin: 5px 0 0 0;
+    }
+
+    .table-crfform .leftlabel {
+        padding: 7px 0 0 10px;
+    }
+
+    .table-crfform .td-control {
+        text-align: left;
+        vertical-align: top;
+    }
+
+    .table-crfform .td-content {
+        text-align: left;
+        vertical-align: top;
+        color: #808080;
+    }
+
+    .table-crfform .form-control {
+        margin: 0 0 0 0;
+    }
+
+table.table-crfform .crfform-input {
+}
+
+.crf-tips {
+    margin: 0;
+    cursor: pointer;
+    display: inline;
+}
+
+    .crf-tips .btn-link {
+        color: #075065;
+    }
+
+        .crf-tips .btn-link:hover {
+            text-decoration: none;
+            color: #631a03;
+        }
+
+.table tbody + tbody {
+    border-top: 0px solid #dddddd;
+}
+
+.hasdata {
+    background-color: #fffee9;
+}
+
+textarea.hasdata, input[type="text"].hasdata, select.hasdata {
+    background-color: #fffee9;
+}
+
+input[disabled], select[disabled], textarea[disabled], input[readonly], select[readonly], textarea[readonly] {
+    cursor: default;
+    background-color: #f7f7f7;
+}
+
+    input[disabled].hasdata, select[disabled].hasdata, textarea[disabled].hasdata {
+        cursor: default;
+        background-color: #f7f7f7;
+    }
+
+.table-condensed {
+    border-bottom: 1px #ddd solid;
+}
+
+.breadcrumb > li {
+    display: inline-block;
+    text-shadow: none;
+    color: #217dc0;
+    font-weight: bold;
+}
+
+.crf-rule-error {
+    color: #b94a48;
+}
+
+.crf-rule-warning {
+    color: orange;
+}
+
+/*文件上传的样式*/
+.wrapper {
+    margin: 5px 0 0 0;
+    width: 100%;
+}
+
+/* qqshop focus */
+#focus {
+    /*height:auto;*/
+    overflow: hidden;
+    position: relative;
+}
+
+    #focus ul {
+        margin-left: 0px;
+        height: auto;
+        position: absolute;
+    }
+
+        #focus ul li {
+            margin-right: 5px;
+            float: left;
+            /*width: 100px;
+            height: 100px;*/
+            overflow: hidden;
+            position: relative;
+            /*background: #000;*/
+        }
+
+            #focus ul li .datasource-image-box {
+                /*width: 96px;
+                height: 96px;*/
+                position: relative;
+                overflow: hidden;
+                margin: 2px;
+            }
+
+                /*#focus ul li .datasource-image-box img {
+                    width: 100px;
+                    height: 100px;
+                }*/
+
+            #focus ul li:hover .datasource-image-box {
+                /*width: 96px;
+                height: 96px;*/
+                opacity: 0.5;
+                margin: 0;
+                border: 2px solid #ff0000;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                border-radius: 4px;
+            }
+
+            #focus ul li .deletebtn {
+                display: none;
+            }
+
+            #focus ul li:hover .deletebtn {
+                display: block;
+                z-index: 99;
+                position: absolute; /*绝对定位*/
+                right: 3px;
+                top: 3px;
+                height: 20px;
+                width: 20px;
+                cursor: pointer;
+                color: #ff0000;
+            }
+
+    #focus .preNext {
+        width: 30px;
+        line-height: 40px;
+        padding-top: 5px;
+        position: absolute;
+        top: 25px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+        #focus .preNext:hover {
+            background: #ccc;
+        }
+
+    #focus .pre {
+        left: 0;
+    }
+
+    #focus .next {
+        right: 0;
+        background-position: right top;
+    }
+
+.ull {
+    margin-top: 5px;
+}
+

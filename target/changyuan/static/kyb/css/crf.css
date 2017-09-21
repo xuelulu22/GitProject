@@ -1,0 +1,238 @@
+﻿.crf {
+    text-align: left;
+}
+
+ table.crf {
+    border-collapse: separate;
+    border-spacing: 0px;
+    display:table;
+}
+
+html .crf,
+.crf table {
+    font-size: 1em;
+}
+
+.crf td {
+    padding:2px 5px 2px 5px;
+    text-align:center;
+    vertical-align: middle;
+    border: 1px solid #ffffff;
+    cursor: default;
+    line-height:20px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    background:#F0F0F0;
+    position:relative;
+}
+
+.crf .edit,
+.crf .edit {
+    cursor:pointer;
+}
+
+.crf .edit:hover,
+.crf .edit:hover {
+    border:1px solid #0379ce;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    cursor:pointer;
+}
+
+.crf td.row-header.selected,
+.crf td.col-header.selected{
+    border:1px solid #0379ce;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.crf td.col-header .nodebtn{
+    float:right;
+    margin-top:2px;
+    margin-right:5px;
+    font-size:16px;
+    cursor:pointer;
+    color:#666666;
+}
+.crf td.col-header .nodebtn:hover{
+    color:#333333;
+}
+
+.crf td.cell-content:hover{
+    background:#ffe96d;
+}
+.crf td.cell-content.selected{
+    background:#ffe96d;
+}
+.crf td.cell-content-disabled{
+    background:#e0e0e0;
+    /*cursor:not-allowed;*/
+}
+.crf td.cell-content-light{
+    background:#e9e3cd;
+}
+
+/*行标题*/
+.crf .row-header{
+    background: #f1eee2;
+    min-width:20px;
+}
+
+/*行子标题*/
+.crf .row-sub-header{
+    background: #6bbffb;
+    min-width:26px;
+    padding:2px 2px 2px 2px;
+    /*cursor:not-allowed;*/
+}
+
+/*列标题*/
+.crf .col-header{
+    height:24px;
+    line-height:20px;
+    background: #6bbffb;
+    min-width:100px;
+    text-align:left;
+}
+
+/*单元格*/
+.crf .cell-content{
+    background:#F0F0F0;
+}
+
+/*列子标题*/
+.crf .col-sub-header{
+    background: #d2ecff;
+    min-width:100px;
+    text-align:left;
+    padding:2px 0 2px 15px;
+    /*cursor:not-allowed;*/
+    height:24px;
+}
+
+/*空单元格*/
+.crf .cell-empty{
+    border:0;
+    background:#F9F9F9;
+}
+.crf .cell-empty:hover{
+    background:#F9F9F9;
+}
+
+/*添加按钮*/
+.crf .addnew{
+    text-align:center;
+    vertical-align: middle;
+    font-size:18px;
+    color:#0379ce;
+    line-height:30px;
+    min-height:30px;
+    min-width:30px;
+    background:#F0F0F0;
+}
+
+.crf-point{
+    width:18px;height:18px;
+    display:inline-block;
+    margin: 3px 0 0 0;
+}
+
+
+.crf-status-0, .crf-status-0:hover{
+    background: url(images/crf_status.png) 0 0 no-repeat;
+}
+.crf-status-1, .crf-status-1:hover{
+    background: url(images/crf_status.png) 0 -18px no-repeat;
+}
+.crf-status-2, .crf-status-2:hover{
+    background: url(images/crf_status.png) 0 -36px no-repeat;
+}
+.crf-status-3, .crf-status-3:hover{
+    background: url(images/crf_status.png) 0 -54px no-repeat;
+}
+.crf-status-4, .crf-status-4:hover{
+    background: url(images/crf_status.png) 0 -72px no-repeat;
+}
+.crf-status-5, .crf-status-5:hover{
+    background: url(images/crf_status.png) 0 -90px no-repeat;
+}
+.crf-status-6, .crf-status-6:hover{
+    background: url(images/crf_status.png) 0 -108px no-repeat;
+}
+.crf-status-7, .crf-status-7:hover{
+    background: url(images/crf_status.png) 0 -126px no-repeat;
+}
+.crf-status-8, .crf-status-8:hover{
+    background: url(images/crf_status.png) 0 -144px no-repeat;
+}
+.crf-status-9, .crf-status-9:hover{
+    background: url(images/crf_status.png) 0 -162px no-repeat;
+}
+
+.crf-status{
+    color:#217dc0;
+    font-size:16px;
+    width:18px;height:18px;
+    display:inline-block;
+    margin: 5px 0 0 0;
+}
+.crf-status:hover{
+    color:#666;
+}
+
+
+/*.crf-status-0:before{ content: "\e67d"; }
+.crf-status-1:before{ content: "\e6c2"; }
+.crf-status-2:before{ content: "\e6c4"; }
+.crf-status-3:before{ content: "\e685"; }
+.crf-status-5:before{ content: "\e6d4"; }
+.crf-status-7:before{ content: "\e6d6"; }
+.crf-status-8:before{ content: "\e632"; }*/
+
+
+/*.crf-status-0:before{ content: "\e67d"; }
+.crf-status-1:before{ content: "\e6d3"; }
+.crf-status-2:before{ content: "\e6c4"; }
+.crf-status-3:before{ content: "\e685"; }
+.crf-status-5:before{ content: "\e6d4"; }
+.crf-status-7:before{ content: "\e6d6"; }
+.crf-status-8:before{ content: "\e632"; }*/
+
+.crf-patient-icon{
+    color:#999;
+    font-size:16px;
+    width:16px;height:16px;
+    margin-top:-10px;
+}
+.crf-patient-icon:before{
+    content: "\e615";
+}
+
+.randombutton{
+    position:absolute;
+    background:url(images/random.png) no-repeat 0 0;
+    width:32px;
+    height:32px;
+    border:0;
+    margin-top:-3px;
+}
+.randombutton[disabled]{
+    position:absolute;
+    background:url(images/random_disabled.png) no-repeat 0 0;
+    width:32px;
+    height:32px;
+    border:0;
+    cursor:default;
+    margin-top:-3px;
+}
+
+.crf .crf-template-icon{
+    position:absolute;
+    top:0px;
+    right:3px;
+    color:#e05606;
+}
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DiagnosticCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.ronglian.ch.model.DiagnosticCategory">
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="DIAGNOSTIC_ID" jdbcType="VARCHAR" property="diagnostic_id" />
+    <result column="PATIENT_ID" jdbcType="VARCHAR" property="patient_id" />
+    <result column="VISIT_ID" jdbcType="INTEGER" property="visit_id" />
+    <result column="DIAGNOSIS_TYPE" jdbcType="VARCHAR" property="diagnosis_type" />
+    <result column="DIAGNOSIS_NO" jdbcType="INTEGER" property="diagnosis_no" />
+    <result column="DIAGNOSIS_CODE_CH" jdbcType="VARCHAR" property="diagnosis_code_ch" />
+    <result column="DIAGNOSIS_CODE_ADD_CH" jdbcType="VARCHAR" property="diagnosis_code_add_ch" />
+    <result column="CREATEBY" jdbcType="VARCHAR" property="createby" />
+    <result column="CREATEDATE" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="UPDATEBY" jdbcType="VARCHAR" property="updateby" />
+    <result column="UPDATEDATE" jdbcType="TIMESTAMP" property="updatedate" />
+    <result column="FLAG" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  
+  <!-- 获取诊断分类信息-->
+	<select id="listDiagnosisCategory" resultMap="BaseResultMap" parameterType="java.util.Map" statementType="STATEMENT">
+		SELECT * FROM DIAGNOSTIC_CATEGORY WHERE 1= 1
+		<if test="diagnostic_id != null and diagnostic_id !=''"> 
+			and DIAGNOSTIC_ID = '${diagnostic_id}'
+		</if>
+	</select>
+</mapper>

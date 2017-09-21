@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="LabTestMasterMapper">
+
+   <resultMap id="BaseResultMap" type="com.ronglian.ch.model.LabTestMaster">
+     	<result column="test_no" jdbcType="VARCHAR" property="test_no" />
+     	<result column="inpatient_no" jdbcType="VARCHAR" property="inpatient_no" />
+     	<result column="outpatient_no" jdbcType="VARCHAR" property="outpatient_no" />
+     	<result column="patient_id" jdbcType="VARCHAR" property="patient_id" />
+     	<result column="visit_id" jdbcType="INTEGER" property="visit_id" />
+     	<result column="spcm_sample_date_time" jdbcType="DATE" property="spcm_sample_date_time" />
+     	<result column="specimen" jdbcType="VARCHAR" property="specimen" />
+     	<result column="createby" jdbcType="VARCHAR" property="createby" />
+     	<result column="createdate" jdbcType="DATE" property="createdate" />
+     	<result column="updateby" jdbcType="VARCHAR" property="updateby" />
+     	<result column="updatedate" jdbcType="DATE" property="updatedate" />
+     	<result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+ 
+  <select id="doSelectLabTestMasterInfo" parameterType="java.util.Map" resultMap="BaseResultMap" statementType="STATEMENT" >
+		select 	* from lab_test_master  where 1 = 1 
+		<if test="id != null and id !=''">
+			and test_no = '${id}'
+		</if>
+		<if test="patient_id != null and patient_id !=''">
+			and patient_id = '${patient_id}'
+		</if>
+		<if test="outpatient_no != null and outpatient_no !=''">
+			and outpatient_no = '${outpatient_no}'
+		</if>
+		<if test="inpatient_no != null and inpatient_no !=''">
+			and inpatient_no = '${inpatient_no}'
+		</if>
+		
+ </select>
+		
+</mapper>

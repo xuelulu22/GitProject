@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DiagnosisMapper">
+  <resultMap id="BaseResultMap" type="com.ronglian.ch.model.Diagnosis">
+    <result column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="INPATIENT_NO" jdbcType="VARCHAR" property="inpatient_no" />
+    <result column="OUTPATIENT_NO" jdbcType="VARCHAR" property="outpatient_no" />
+    <result column="PATIENT_ID" jdbcType="VARCHAR" property="patient_id" />
+    <result column="VISIT_ID" jdbcType="INTEGER" property="visit_id" />
+    <result column="DIAGNOSIS_TYPE" jdbcType="VARCHAR" property="diagnosis_type" />
+    <result column="DIAGNOSIS_NO" jdbcType="INTEGER" property="diagnosis_no" />
+    <result column="DIAGNOSIS_DESC_CH" jdbcType="VARCHAR" property="diagnosis_desc_ch" />
+    <result column="DIAGNOSIS_DATE" jdbcType="TIMESTAMP" property="diagnosis_date" />
+    <result column="CODE_VERSION" jdbcType="VARCHAR" property="code_version" />
+    <result column="TREAT_DAYS" jdbcType="INTEGER" property="treat_days" />
+    <result column="TREAT_RESULT" jdbcType="VARCHAR" property="treat_result" />
+    <result column="CREATEBY" jdbcType="VARCHAR" property="createby" />
+    <result column="CREATEDATE" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="UPDATEBY" jdbcType="VARCHAR" property="updateby" />
+    <result column="UPDATEDATE" jdbcType="TIMESTAMP" property="updatedate" />
+    <result column="FLAG" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+
+  
+  <!-- 门诊、住院  -诊断 -->
+    <select id="listPageDiagnosis" parameterType="page" resultMap="BaseResultMap" statementType="STATEMENT">
+	   select * from diagnosis  where 1 = 1
+			<if test="pd.outpatient_no != null and pd.outpatient_no !=''">
+					and outpatient_no = '${pd.outpatient_no}'
+			</if>
+			<if test="pd.inpatient_no != null and pd.inpatient_no !=''">
+					and inpatient_no = '${pd.inpatient_no}'
+			</if>
+	</select>
+	
+	<!-- 患者病例 -门诊诊断 -->
+	   <select id="listPageHzMzDiagnosis" parameterType="page" resultMap="BaseResultMap" statementType="STATEMENT">
+	   select * from diagnosis  where 1 = 1 and patient_id = '${pd.patient_id}' and (outpatient_no !='' or inpatient_no is null )
+	</select>
+	
+	<!-- 患者病例 -住院诊断 -->
+	   <select id="listPageHzZyDiagnosis" parameterType="page" resultMap="BaseResultMap" statementType="STATEMENT">
+	   select * from diagnosis  where 1 = 1 and patient_id = '${pd.patient_id}' and (inpatient_no !='' or outpatient_no is null )
+	</select>
+	
+	
+	 <select id="selectByPrimaryKey" parameterType="java.util.Map" resultMap="BaseResultMap" statementType="STATEMENT">
+	 select * FROM diagnosis  WHERE id ='${id}'
+	</select>
+  
+  
+  	<!-- 诊断查询 -->
+	<select id="listPageDiagnosis222" parameterType="page" resultType="pd" statementType="STATEMENT">
+		SELECT A.ID,A.PATIENT_ID,A.OUTPATIENT_NO,A.INPATIENT_NO,C.NAME,A.DIAGNOSIS_TYPE,A.DIAGNOSIS_NO,CONCAT(SUBSTRING(A.DIAGNOSIS_DESC_CH,1,20),'...') DIAGNOSIS_DESC_CH,A.DIAGNOSIS_DATE,A.CODE_VERSION,
+		A.TREAT_DAYS,CONCAT(SUBSTRING(A.TREAT_RESULT,1,20),'...') TREAT_RESULT,B.DIAGNOSIS_CODE_CH,B.DIAGNOSIS_CODE_ADD_CH  
+		FROM DIAGNOSIS A LEFT JOIN DIAGNOSTIC_CATEGORY B ON A.ID = B.DIAGNOSTIC_ID AND B.FLAG = 1
+		INNER JOIN PAT_MASTER_INDEX C ON A.PATIENT_ID = C.PATIENT_ID AND C.FLAG = 1 
+		WHERE 1=1 AND A.FLAG = 1
+		<if test="pd.DIAGNOSIS_TYPE != null and pd.DIAGNOSIS_TYPE !=''">
+			and A.DIAGNOSIS_TYPE = '${pd.DIAGNOSIS_TYPE}'
+		</if>
+		<if test="pd.INPATIENT_NO != null and pd.INPATIENT_NO !=''">
+			and A.INPATIENT_NO = '${pd.INPATIENT_NO}'
+		</if>
+		<if test="pd.OUTPATIENT_NO != null and pd.OUTPATIENT_NO !=''">
+			and A.OUTPATIENT_NO = '${pd.OUTPATIENT_NO}'
+		</if>
+		<if test="pd.PATIENT_ID != null and pd.PATIENT_ID !=''">
+			and A.PATIENT_ID = '${pd.PATIENT_ID}'
+		</if>
+		<if test="pd.TYPE != null and pd.TYPE =='mz'">
+			and A.OUTPATIENT_NO is not null and A.OUTPATIENT_NO !=''
+		</if>
+		<if test="pd.TYPE != null and pd.TYPE =='zy'">
+			and A.INPATIENT_NO is not null and A.INPATIENT_NO !=''
+		</if>
+		<if test="pd.ORDER != null and pd.ORDER !=''">
+			order by A.DIAGNOSIS_DATE ${pd.ORDER}
+		</if>
+	</select>
+</mapper>

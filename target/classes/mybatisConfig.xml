@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd"> 
+<configuration>
+  <typeAliases>
+  		<typeAlias type="com.ronglian.core.util.PageData" alias="pd"/>
+		<!-- 分页 -->
+		<typeAlias type="com.ronglian.core.util.Page" alias="Page"/>
+  </typeAliases>
+  
+  	<!-- 分页 -->
+  	<plugins>
+		<plugin interceptor="com.ronglian.core.util.PagePlugin">
+			<property name="dialect" value="mysql"/>
+			<property name="pageSqlId" value=".*listPage.*"/>
+		</plugin>
+	</plugins>
+</configuration>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ronglian.log.dao.LogDocErrorDetailMapper">
+    <resultMap id="BaseResultMap" type="LogDocErrorDetail">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="ERROR_ID" jdbcType="VARCHAR" property="errorId"/>
+        <result column="ERROR_TYPE" jdbcType="VARCHAR" property="errorType"/>
+        <result column="ERROR_SUBTYPE" jdbcType="VARCHAR" property="errorSubtype"/>
+        <result column="ERROR_DESC" jdbcType="VARCHAR" property="errorDesc"/>
+        <result column="ERROR_EXCEPTION" jdbcType="LONGVARBINARY" property="errorException"/>
+    </resultMap>
+    <select id="getLogDocErrorDetailById" resultMap="BaseResultMap">
+        SELECT
+            *
+        FROM
+             t_log_doc_error_detail
+        WHERE            
+            ID = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findAllLogDocErrorDetail" resultMap="BaseResultMap">
+          SELECT * FROM t_log_doc_error_detail 
+    </select>
+    
+    <delete id="deleteLogDocErrorDetail">
+        DELETE
+        FROM
+             t_log_doc_error_detail
+        WHERE            
+            ID = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="saveLogDocErrorDetail" parameterType="LogDocErrorDetail" >
+        INSERT INTO t_log_doc_error_detail
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="errorId != null" >
+                ERROR_ID,
+            </if>
+            <if test="errorType != null" >
+                ERROR_TYPE,
+            </if>
+            <if test="errorSubtype != null" >
+                ERROR_SUBTYPE,
+            </if>
+            <if test="errorDesc != null" >
+                ERROR_DESC,
+            </if>
+            <if test="errorException != null" >
+                ERROR_EXCEPTION,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if> 
+            <if test="errorId != null" >
+                #{errorId,jdbcType=VARCHAR},
+            </if> 
+            <if test="errorType != null" >
+                #{errorType,jdbcType=VARCHAR},
+            </if> 
+            <if test="errorSubtype != null" >
+                #{errorSubtype,jdbcType=VARCHAR},
+            </if> 
+            <if test="errorDesc != null" >
+                #{errorDesc,jdbcType=VARCHAR},
+            </if> 
+            <if test="errorException != null" >
+                #{errorException,jdbcType=LONGVARBINARY},
+            </if> 
+        </trim>
+    </insert>
+
+    <update id="updateLogDocErrorDetail" parameterType="LogDocErrorDetail" >
+        UPDATE t_log_doc_error_detail
+        <set>
+            <if test="id != null" >
+                ID = #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="errorId != null" >
+                ERROR_ID = #{errorId,jdbcType=VARCHAR},
+            </if>
+            <if test="errorType != null" >
+                ERROR_TYPE = #{errorType,jdbcType=VARCHAR},
+            </if>
+            <if test="errorSubtype != null" >
+                ERROR_SUBTYPE = #{errorSubtype,jdbcType=VARCHAR},
+            </if>
+            <if test="errorDesc != null" >
+                ERROR_DESC = #{errorDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="errorException != null" >
+                ERROR_EXCEPTION = #{errorException,jdbcType=LONGVARBINARY},
+            </if>
+        </set>
+        WHERE 
+            ID = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

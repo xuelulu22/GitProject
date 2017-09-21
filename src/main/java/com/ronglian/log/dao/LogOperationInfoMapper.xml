@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ronglian.log.dao.LogOperationInfoMapper">
+    <resultMap id="BaseResultMap" type="LogOperationInfo">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="IP" jdbcType="VARCHAR" property="ip"/>
+        <result column="OPT_TYPE" jdbcType="VARCHAR" property="optType"/>
+        <result column="OPT_MODEL" jdbcType="VARCHAR" property="optModel"/>
+        <result column="OPT_TIME" jdbcType="TIMESTAMP" property="optTime"/>
+        <result column="OPT_USER_ID" jdbcType="VARCHAR" property="optUserId"/>
+        <result column="OPT_USER_NAME" jdbcType="VARCHAR" property="optUserName"/>
+        <result column="OPT_DESC" jdbcType="VARCHAR" property="optDesc"/>
+    </resultMap>
+    <select id="getLogOperationInfoById" resultMap="BaseResultMap">
+        SELECT
+            *
+        FROM
+             t_log_operation_info
+        WHERE            
+            ID = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findAllLogOperationInfo" resultMap="BaseResultMap">
+          SELECT * FROM t_log_operation_info 
+    </select>
+    
+    <delete id="deleteLogOperationInfo">
+        DELETE
+        FROM
+             t_log_operation_info
+        WHERE            
+            ID = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="saveLogOperationInfo" parameterType="LogOperationInfo" >
+        INSERT INTO t_log_operation_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="ip != null" >
+                IP,
+            </if>
+            <if test="optType != null" >
+                OPT_TYPE,
+            </if>
+            <if test="optModel != null" >
+                OPT_MODEL,
+            </if>
+            <if test="optTime != null" >
+                OPT_TIME,
+            </if>
+            <if test="optUserId != null" >
+                OPT_USER_ID,
+            </if>
+            <if test="optUserName != null" >
+                OPT_USER_NAME,
+            </if>
+            <if test="optDesc != null" >
+                OPT_DESC,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if> 
+            <if test="ip != null" >
+                #{ip,jdbcType=VARCHAR},
+            </if> 
+            <if test="optType != null" >
+                #{optType,jdbcType=VARCHAR},
+            </if> 
+            <if test="optModel != null" >
+                #{optModel,jdbcType=VARCHAR},
+            </if> 
+            <if test="optTime != null" >
+                #{optTime,jdbcType=TIMESTAMP},
+            </if> 
+            <if test="optUserId != null" >
+                #{optUserId,jdbcType=VARCHAR},
+            </if> 
+            <if test="optUserName != null" >
+                #{optUserName,jdbcType=VARCHAR},
+            </if> 
+            <if test="optDesc != null" >
+                #{optDesc,jdbcType=VARCHAR},
+            </if> 
+        </trim>
+    </insert>
+
+    <update id="updateLogOperationInfo" parameterType="LogOperationInfo" >
+        UPDATE t_log_operation_info
+        <set>
+            <if test="id != null" >
+                ID = #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="ip != null" >
+                IP = #{ip,jdbcType=VARCHAR},
+            </if>
+            <if test="optType != null" >
+                OPT_TYPE = #{optType,jdbcType=VARCHAR},
+            </if>
+            <if test="optModel != null" >
+                OPT_MODEL = #{optModel,jdbcType=VARCHAR},
+            </if>
+            <if test="optTime != null" >
+                OPT_TIME = #{optTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="optUserId != null" >
+                OPT_USER_ID = #{optUserId,jdbcType=VARCHAR},
+            </if>
+            <if test="optUserName != null" >
+                OPT_USER_NAME = #{optUserName,jdbcType=VARCHAR},
+            </if>
+            <if test="optDesc != null" >
+                OPT_DESC = #{optDesc,jdbcType=VARCHAR},
+            </if>
+        </set>
+        WHERE 
+            ID = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

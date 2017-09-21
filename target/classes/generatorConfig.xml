@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" > 
+<generatorConfiguration >  
+  <classPathEntry location="D:\\jar\mysql-connector-java-5.0.4.jar" />
+  <context id="context1" >  
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.6.52:3306/ssm" userId="root" password="root" />
+    <javaModelGenerator targetPackage="com.ronglian.ch.model" targetProject="changhai/src/main/java/" />  
+    <sqlMapGenerator targetPackage="com.ronglian.ch.mapper" targetProject="changhai/src/main/java/" ></sqlMapGenerator>  
+    <javaClientGenerator targetPackage="com.ronglian.ch.dao" targetProject="changhai/src/main/java/" type="XMLMAPPER" />  
+    <!-- <table schema="" tableName="ATFM_ROUTE_CTRL" ></table>  --> 
+
+    <table tableName="DIAGNOSIS" domainObjectName="Diagnosis"></table> 
+    <table tableName="DIAGNOSTIC_CATEGORY" domainObjectName="DiagnosticCategory"></table> 
+    <table tableName="PAT_VISIT" domainObjectName="PatVisit"></table> 
+    
+  </context>  
+</generatorConfiguration> 

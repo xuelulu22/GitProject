@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<b:beans xmlns="http://www.springframework.org/schema/security"  
+    xmlns:b="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans   
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+    http://www.springframework.org/schema/security   
+    http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+    <!-- http安全配置 -->
+    <http use-expressions='true' 
+		entry-point-ref="authenticationProcessingFilterEntryPoint"
+		access-denied-page="/access-denied.jsp">
+			<!-- filters="none"表示当我们访问“/**/*.jpg”时，是不会使用任何一个过滤器去处理这个请求的 -->
+			<!-- 不要过滤图片等静态资源，其中**代表可以跨越目录，*不可以跨越目录。 -->
+			<intercept-url pattern="/**/*.png" filters="none" />
+			<intercept-url pattern="/**/*.jpg" filters="none" />
+			<intercept-url pattern="/**/*.gif" filters="none" />
+			<intercept-url pattern="/**/*.css" filters="none" />
+			<intercept-url pattern="/**/*.js" filters="none" />
+			<intercept-url pattern="/ws/*" filters="none" />
+ 			<intercept-url pattern="/tab" filters="none" />
+			<intercept-url pattern="/login_default" filters="none" />
+			<intercept-url pattern="/doNotNeedSecurity_*" filters="none" />
+			<!--doNotNeedSecurity-->
+			<intercept-url pattern="/dnns_*" filters="none" />
+        <!-- 登录页面不过滤 -->
+		<intercept-url pattern="/login.jsp" filters="none" />
+		
+		<!-- 修改注销页面 -->
+		<!--<logout invalidate-session="true" logout-url="/j_spring_security_logout" success-handler-ref="customLogoutSuccessHandler"/>-->
+			
+        <!-- "记住我"功能，采用持久化策略（将用户的登录信息存放在数据库表中）需要创建一张persistent_logins 表   
+        <remember-me data-source-ref="dataSource" />
+  
+        --><!-- 检测失效的sessionId,超时时定位到另外一个URL -->
+       	<session-management invalid-session-url="/error/noSession.jsp">
+			<concurrency-control max-sessions="1"
+				error-if-maximum-exceeded="true" />
+		</session-management>
+        
+        <!--登出记录日志时间,可以后期添加-->
+		<logout invalidate-session="true" logout-url="/j_spring_security_logout" success-handler-ref="customLogoutSuccessHandler"/>
+  		
+  		<!-- 认证和授权 -->
+		<custom-filter ref="loginFilter" position="FORM_LOGIN_FILTER" />
+			
+        <!--  增加一个自定义的filter，放在FILTER_SECURITY_INTERCEPTOR之前，实现用户、角色、权限、资源的数据库管理。 -->  
+        <custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR" />  
+    </http>  
+    
+   	<b:bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<b:property name="basename" value="classpath:org/springframework/security/messages_zh_CN" />
+	</b:bean>
+	<b:bean id="localeResolver" class="org.springframework.web.servlet.i18n.AcceptHeaderLocaleResolver" />
+	
+	<!-- 注销 -->
+	<b:bean id="customLogoutSuccessHandler" class="com.ronglian.security.service.impl.CustomLogoutSuccessHandler" />
+    
+    <!-- 登录验证器 -->
+	<b:bean id="loginFilter"
+		class="com.ronglian.security.service.impl.MyUsernamePasswordAuthenticationFilter">
+		<!-- 处理登录 -->
+		<!--登录URL，spring默认连接为j_spring_security_check-->
+		<b:property name="filterProcessesUrl" value="/j_spring_security_check"/>
+		<!--登录成功处理，可以后期记录IP和日志-->
+		<b:property name="authenticationSuccessHandler" ref="loginLogAuthenticationSuccessHandler"/>
+		<!--登录失败处理-->
+		<b:property name="authenticationFailureHandler" ref="simpleUrlAuthenticationFailureHandler"/>
+		<!--获取用户的登录权限-->
+		<b:property name="authenticationManager" ref="authenticationManager"/>
+	</b:bean>
+	
+	<b:bean id="loginLogAuthenticationSuccessHandler"
+		class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler">
+		<b:property name="defaultTargetUrl" value="/index.do"></b:property>
+	</b:bean>
+	<b:bean id="simpleUrlAuthenticationFailureHandler"
+		class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">
+		<b:property name="defaultFailureUrl" value="/login.jsp"></b:property>
+	</b:bean>
+    
+    <!--  一个自定义的filter，必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性。-->  
+    <b:bean id="myFilter" class="com.ronglian.security.service.impl.MyFilterSecurityInterceptor">  
+		<!-- 用户拥有的权限 -->
+		<b:property name="authenticationManager" ref="authenticationManager" />
+		<!-- 用户是否拥有所请求资源的权限 -->
+		<b:property name="accessDecisionManager" ref="myAccessDecisionManager" />
+		<!-- 资源与权限对应关系 -->
+		<b:property name="securityMetadataSource" ref="mySecurityMetadataSource" />
+
+    </b:bean>  
+  
+  	<global-method-security pre-post-annotations="enabled" />
+  
+    <!-- 注意能够为authentication-manager 设置alias别名  -->   
+    <authentication-manager alias="authenticationManager">
+		<authentication-provider
+			user-service-ref="myUserDetailService">
+			<!-- 默认提供的PasswordEncoder包含plaintext, sha, sha-256, md5, md4, {sha}, 
+				{ssha}。 其中{sha}和{ssha}是专门为ldap准备的，plaintext意味着不对密码进行加密， 如果我们不设置PasswordEncoder，默认就会使用它。 -->
+			<password-encoder hash="plaintext" />
+		</authentication-provider>
+	</authentication-manager>
+  
+    <b:bean id="myUserDetailService" class="com.ronglian.security.service.impl.MyUserDetailService" />  
+  
+    <!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源。11/3/23 -->  
+    <b:bean id="myAccessDecisionManager"  
+        class="com.ronglian.security.service.impl.MyAccessDecisionManager">  
+    </b:bean>    
+  
+    <!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色去访问。 -->
+    <b:bean id="mySecurityMetadataSource" class="com.ronglian.security.service.impl.MyInvocationSecurityMetadataSource">
+    	<b:constructor-arg name="sysResourceService" ref="sysResourceService"></b:constructor-arg>
+    </b:bean>
+    
+    <b:bean id="sysResourceService" class="com.ronglian.security.service.impl.SysResourceServiceImpl" />
+    
+   	<b:bean id="authenticationProcessingFilterEntryPoint"
+		class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<b:property name="loginFormUrl" value="/login.jsp"></b:property>
+	</b:bean>
+</b:beans>

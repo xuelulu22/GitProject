@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:element name="ClinicalDocument">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="header"/>
+        <xs:element ref="structuredBody"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="header">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="DocName"/>
+        <xs:element ref="DocTypeCode"/>
+        <xs:element ref="DocTypeName"/>
+        <xs:element ref="DocCode"/>
+        <xs:element ref="DocVersion"/>
+        <xs:element ref="DocOrgCode"/>
+        <xs:element ref="UploadType"/>
+        <xs:element ref="UploadSystem"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DocName" type="xs:string"/>
+  <xs:element name="DocTypeCode" type="xs:integer"/>
+  <xs:element name="DocTypeName" type="xs:string"/>
+  <xs:element name="DocCode" type="xs:integer"/>
+  <xs:element name="DocVersion" type="xs:decimal"/>
+  <xs:element name="DocOrgCode" type="xs:NMTOKEN"/>
+  <xs:element name="UploadType" type="xs:integer"/>
+  <xs:element name="UploadSystem" type="xs:integer"/>
+  <xs:element name="structuredBody">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="PatientName"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PatientName" type="xs:string"/>
+</xs:schema>

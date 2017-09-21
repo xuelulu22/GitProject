@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="changyuan"
+  id="myeclipse.1505035642021"
+  context-root="/changyuan"
+  j2ee-spec="1.7"
+  archive="changyuan.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

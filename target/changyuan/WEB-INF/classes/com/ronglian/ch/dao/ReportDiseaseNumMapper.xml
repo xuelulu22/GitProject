@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ReportDiseaseNumMapper">
+  <resultMap id="BaseResultMap" type="com.ronglian.ch.model.ReportDiseaseNum">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="YEAR" jdbcType="VARCHAR" property="year" />
+    <result column="MONTH" jdbcType="VARCHAR" property="month" />
+    <result column="disease_name" jdbcType="VARCHAR" property="disease_name" />
+    <result column="case_num" jdbcType="INTEGER" property="case_num" />
+  </resultMap>
+    <resultMap id="BaseResultMap2" type="com.ronglian.ch.model.ReportMedicalRecord">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="YEAR" jdbcType="VARCHAR" property="year" />
+    <result column="MONTH" jdbcType="VARCHAR" property="month" />
+    <result column="disease_name" jdbcType="VARCHAR" property="disease_name" />
+    <result column="medical_num" jdbcType="INTEGER" property="medical_num" />
+    <result column="doctor_name" jdbcType="VARCHAR" property="doctor_name" />
+  </resultMap>
+   <resultMap id="BaseResultMap3" type="com.ronglian.ch.model.ReportOperationNum">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="YEAR" jdbcType="VARCHAR" property="year" />
+    <result column="MONTH" jdbcType="VARCHAR" property="month" />
+    <result column="operation_name" jdbcType="VARCHAR" property="operation_name" />
+    <result column="operation_all_num" jdbcType="INTEGER" property="operation_all_num" />
+     <result column="death_num" jdbcType="INTEGER" property="death_num" />
+      <result column="operation_again_num" jdbcType="INTEGER" property="operation_again_num" />
+       <result column="hospitalization_num" jdbcType="DOUBLE" property="hospitalization_num" />
+  </resultMap>
+     <resultMap id="BaseResultMap4" type="com.ronglian.ch.model.ReportDiseaseNumT">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="YEAR" jdbcType="VARCHAR" property="year" />
+    <result column="MONTH" jdbcType="VARCHAR" property="month" />
+    <result column="disease_name" jdbcType="VARCHAR" property="disease_name" />
+    <result column="case_num" jdbcType="INTEGER" property="case_num" />
+    <result column="hospitalization_num" jdbcType="DOUBLE" property="hospitalization_num" />
+    <result column="death_num" jdbcType="INTEGER" property="death_num" />
+    <result column="death_radio" jdbcType="DOUBLE" property="death_radio" />
+    <result column="cure_num" jdbcType="INTEGER" property="cure_num" />
+    <result column="better_num" jdbcType="INTEGER" property="better_num" />
+    <result column="hospitalization_in_15" jdbcType="INTEGER" property="hospitalization_in_15" />
+     <result column="hospitalization_in_31" jdbcType="INTEGER" property="hospitalization_in_31" />
+      <result column="hospitalization_in_15_radio" jdbcType="DOUBLE" property="hospitalization_in_15_radio" />
+  </resultMap>
+    <resultMap id="BaseResultMap5" type="com.ronglian.ch.model.ReportTreatment">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="YEAR" jdbcType="VARCHAR" property="year" />
+    <result column="MONTH" jdbcType="VARCHAR" property="month" />
+    <result column="disease_name" jdbcType="VARCHAR" property="disease_name" />
+    <result column="chemotherapy_num" jdbcType="INTEGER" property="chemotherapy_num" />
+     <result column="radiotherapy_num" jdbcType="INTEGER" property="radiotherapy_num" />
+      <result column="operation_num" jdbcType="INTEGER" property="operation_num" />
+       <result column="targeted_therapy_num" jdbcType="INTEGER" property="targeted_therapy_num" />
+       <result column="state" jdbcType="VARCHAR" property="state" />
+       <result column="patient_name" jdbcType="VARCHAR" property="patient_name" />
+        <result column="count" jdbcType="INTEGER" property="count" />
+  </resultMap>
+ <select id="doSelectReportDiseaseNum" parameterType="java.util.Map" resultMap="BaseResultMap" statementType="STATEMENT">
+		SELECT id,YEAR, MONTH,disease_name, case_num FROM report_disease_num where 1=1
+		<if test="disease_name != null and disease_name !=''">
+			and disease_name = '${disease_name}'
+		</if>
+		<if test="year != null and year !=''">
+			and year = '${year}'
+		</if>
+		<if test="gy != null and gy !=''">
+			group by disease_name
+		</if>
+		ORDER BY month
+ </select>
+	
+	 <select id="doSelectReportMedicalRecord" parameterType="java.util.Map" resultMap="BaseResultMap2" statementType="STATEMENT">
+           SELECT * FROM report_medical_record WHERE 1=1 
+           <if test="doctor_name != null and doctor_name !=''">
+			and doctor_name = '${doctor_name}'
+		   </if>
+		   <if test="year != null and year !=''">
+			and year = '${year}'
+		</if>
+		    <if test="gy != null and gy !=''">
+			GROUP BY doctor_name 
+		   </if>
+	     	ORDER BY month
+     </select>
+     
+      <select id="listPageRportMedicalRecord" parameterType="java.util.Map" resultMap="BaseResultMap2" statementType="STATEMENT">
+           SELECT * FROM report_medical_record WHERE 1=1 
+           <if test="pd.doctor_name != null and pd.doctor_name !=''">
+           and doctor_name LIKE CONCAT('%', '${pd.doctor_name}','%')
+		   </if>
+		   <if test="pd.year != null and pd.year !=''">
+			and year = '${pd.year}'
+		   </if>
+	     	ORDER BY month
+     </select>
+     
+     
+  <select id="doSelectReportOperationNum" parameterType="java.util.Map" resultMap="BaseResultMap3" statementType="STATEMENT">
+                SELECT * FROM report_operation_num  WHERE 1=1 
+                 <if test="year != null and year !=''">
+           and year = '${year}'
+		   </if>
+	     	ORDER BY month
+     </select>
+
+     
+          <select id="listPageReportOperationNum" parameterType="java.util.Map" resultMap="BaseResultMap3" statementType="STATEMENT">
+            SELECT * FROM report_operation_num  WHERE 1=1 
+           <if test="pd.operation_name != null and pd.operation_name !=''">
+           and operation_name LIKE CONCAT('%', '${pd.operation_name}','%')
+		   </if>
+	     	ORDER BY month
+	     	 </select>
+	     	 
+	     	<select id="listPageReportDiseaseNumT" parameterType="java.util.Map" resultMap="BaseResultMap4" statementType="STATEMENT">
+            SELECT * FROM report_disease_num2  WHERE 1=1 
+               <if test="pd.disease_name != null and pd.disease_name !=''">
+           and disease_name LIKE CONCAT('%', '${pd.disease_name}','%')
+		   </if>
+	     	ORDER BY month
+             </select>
+             
+                <select id="doSelectReportDiseaseNumT" parameterType="java.util.Map" resultMap="BaseResultMap4" statementType="STATEMENT">
+           SELECT * FROM report_disease_num2 WHERE 1=1 
+             <if test="disease_name != null and disease_name !=''">
+         			and disease_name = '${disease_name}'
+		   </if>
+           <if test="gy != null and gy !=''">
+           GROUP BY disease_name
+		   </if>
+	     	ORDER BY month
+     </select>
+     
+        <select id="doSelectReportTreatment" parameterType="java.util.Map" resultMap="BaseResultMap5" statementType="STATEMENT">
+            SELECT COUNT(*) AS count,id, YEAR, MONTH, disease_name, chemotherapy_num, radiotherapy_num, operation_num, targeted_therapy_num, state, patient_name from report_treatment  where 1=1
+           <if test="year != null and year !=''">
+             and year = '${year}'
+		   </if>
+		   <if test="gy != null and gy !=''">
+           	GROUP BY disease_name
+		   </if>
+	     	ORDER BY month
+	     	 </select>
+	     	  <resultMap id="BaseResultMap6" type="com.ronglian.ch.model.ReportTreatment">
+               <result column="count2" jdbcType="INTEGER" property="count2" />
+               <result column="count3" jdbcType="INTEGER" property="count3" />
+               <result column="count4" jdbcType="INTEGER" property="count4" />
+               <result column="count5" jdbcType="INTEGER" property="count5" />
+             </resultMap>
+	     	 <select id="doSelectSum" parameterType="java.util.Map" resultMap="BaseResultMap6" statementType="STATEMENT">
+			           SELECT SUM(chemotherapy_num) AS count2,
+				SUM(radiotherapy_num) AS COUNT3,
+				SUM(operation_num) AS COUNT4,
+				SUM(targeted_therapy_num) AS COUNT5
+				FROM 
+				report_treatment 
+			WHERE 1=1
+           <if test="year != null and year !=''">
+             and year = '${year}'
+		   </if>
+	     	 </select>
+	     	     <select id="listPageReportTreatment" parameterType="java.util.Map" resultMap="BaseResultMap5" statementType="STATEMENT">
+           SELECT * FROM report_treatment  WHERE 1=1 
+           <if test="pd.disease_name != null and pd.disease_name !=''">
+           and disease_name LIKE CONCAT('%', '${pd.disease_name}','%')
+		   </if>
+     </select>
+     
+     <resultMap id="BaseResultMap7" type="com.ronglian.ch.model.ReportScientificResearch">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="YEAR" jdbcType="VARCHAR" property="year" />
+    <result column="MONTH" jdbcType="VARCHAR" property="month" />
+    <result column="disease_name" jdbcType="VARCHAR" property="disease_name" />
+    <result column="scientific_report_num" jdbcType="INTEGER" property="scientific_report_num" />
+    <result column="doctor_name" jdbcType="VARCHAR" property="doctor_name" />
+    <result column="finish" jdbcType="INTEGER" property="finish" />
+    <result column="notfinish" jdbcType="INTEGER" property="notfinish" />
+     <result column="sum1" jdbcType="INTEGER" property="sum1" />
+  </resultMap>
+	     	 
+	     	      <select id="doselectA1" parameterType="java.util.Map" resultMap="BaseResultMap7" statementType="STATEMENT">
+       SELECT id, YEAR, disease_name, scientific_report_num, doctor_name, finish, notfinish FROM report_scientific_research where 1=1
+       <if test="year != null and year !=''">
+           and year = '${year}'
+		   </if>
+       GROUP BY doctor_name
+	     	   </select>
+	     	   
+	     	     <select id="doselectA2" parameterType="java.util.Map" resultMap="BaseResultMap7" statementType="STATEMENT">
+         SELECT SUM(scientific_report_num) AS 'sum1',id, YEAR, disease_name, scientific_report_num, doctor_name, 
+         finish, notfinish FROM report_scientific_research where 1=1
+         <if test="year != null and year !=''">
+           and year = '${year}'
+		   </if>
+         GROUP BY disease_name
+	     	   </select>
+	     	   <select id="listPageReportScientificResearch" parameterType="java.util.Map" resultMap="BaseResultMap7" statementType="STATEMENT">
+            SELECT * FROM report_scientific_research   WHERE 1=1 
+           <if test="pd.disease_name != null and pd.disease_name !=''">
+           and disease_name LIKE CONCAT('%', '${pd.disease_name}','%')
+		   </if>
+		   <if test="pd.doctor_name != null and pd.doctor_name !=''">
+           and doctor_name LIKE CONCAT('%', '${pd.doctor_name}','%')
+		   </if>
+	     	 </select>
+	     	 
+	     	    <select id="listPageReportDiseaseNum" parameterType="java.util.Map" resultMap="BaseResultMap" statementType="STATEMENT">
+            SELECT * FROM report_disease_num  WHERE 1=1 
+           <if test="pd.disease_name != null and pd.disease_name !=''">
+           and disease_name LIKE CONCAT('%', '${pd.disease_name}','%')
+		   </if>
+	     	 </select>
+	     	 
+	     	   
+</mapper>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OutpMrMapper">
+
+  <resultMap id="OutpMrClinicMasterMap" type="com.ronglian.ch.model.OutpMrClinicMaster">
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CLINIC_LABEL" jdbcType="VARCHAR" property="clinic_label" />
+    <result column="DOCTOR" jdbcType="VARCHAR" property="doctor" />
+    <result column="DEPT_ADMISSION" jdbcType="VARCHAR" property="dept_admission" />
+    <result column="VISIT_DATE" jdbcType="DATE" property="visit_date" />
+    <result column="VISIT_NO" jdbcType="INTEGER" property="visit_no" />
+    <result column="ILLNESS_DESC" jdbcType="VARCHAR" property="illness_desc" />
+    <result column="ANAMNESIS" jdbcType="VARCHAR" property="anamnesis" />
+    <result column="DIAG_DESC" jdbcType="VARCHAR" property="diag_desc" />
+  </resultMap>
+  
+ 
+	<select id="getOutpMrClinicMasterInfo" parameterType="java.util.Map" resultMap="OutpMrClinicMasterMap" statementType="STATEMENT">
+		SELECT
+		  n.NAME,
+		  n.CLINIC_LABEL,
+		  n.DOCTOR,
+		  n.DEPT_ADMISSION,
+		  m.VISIT_DATE,
+		  m.VISIT_NO,
+		  m.ILLNESS_DESC,
+		  m.ANAMNESIS,
+		  m.DIAG_DESC
+		FROM outp_mr m,
+      clinic_master n
+    WHERE m.PATIENT_ID = n.PATIENT_ID
+    <if test="id != null and id !=''">
+			AND m.id = '${id}'
+		</if>
+        <if test="patient_id != null and patient_id !=''">
+			AND m.PATIENT_ID = '${patient_id}'
+		</if>
+		<if test="outpatient_no != null and outpatient_no !=''">
+			and n.outpatient_no = '${outpatient_no}'
+		</if>
+    </select>
+ 
+</mapper>

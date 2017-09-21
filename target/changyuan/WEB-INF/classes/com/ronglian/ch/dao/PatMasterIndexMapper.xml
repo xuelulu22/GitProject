@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PatMasterIndexMapper">
+  <resultMap id="BaseResultMap" type="com.ronglian.ch.model.PatMasterIndex">
+   <result column="patient_id" jdbcType="VARCHAR" property="patient_id" />
+   <result column="name" jdbcType="VARCHAR" property="name" />
+   <result column="name_phonetic" jdbcType="VARCHAR" property="name_phonetic" />
+   <result column="sex" jdbcType="VARCHAR" property="sex" />
+   <result column="id_no" jdbcType="VARCHAR" property="id_no" />
+   <result column="date_of_birth" jdbcType="DATE" property="date_of_birth" />
+   <result column="birth_place" jdbcType="VARCHAR" property="birth_place" />
+   <result column="zip_code" jdbcType="VARCHAR" property="zip_code" />
+   <result column="inp_no" jdbcType="VARCHAR" property="inp_no" />
+   <result column="mailing_address" jdbcType="VARCHAR" property="mailing_address" />
+   <result column="phone_number_home" jdbcType="VARCHAR" property="phone_number_home" />
+   <result column="phone_number_business" jdbcType="VARCHAR" property="phone_number_business" />
+   <result column="next_of_kin" jdbcType="VARCHAR" property="next_of_kin" />
+   <result column="relationship" jdbcType="VARCHAR" property="relationship" />
+   <result column="next_of_kin_phone" jdbcType="VARCHAR" property="next_of_kin_phone" />
+   <result column="createby" jdbcType="VARCHAR" property="createby" />
+   <result column="createdate" jdbcType="DATE" property="createdate" />
+   <result column="updateby" jdbcType="VARCHAR" property="updateby" />
+   <result column="updatedate" jdbcType="DATE" property="updatedate" />
+   <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  
+  <resultMap id="ExamReportExPacsReportMap" type="com.ronglian.ch.model.ExamReportExPacsReport">
+   <result column="id" jdbcType="VARCHAR" property="id" />
+   <result column="inpatient_no" jdbcType="VARCHAR" property="inpatient_no" />
+   <result column="outpatient_no" jdbcType="VARCHAR" property="outpatient_no" />
+   <result column="patient_id" jdbcType="VARCHAR" property="patient_id" />
+   <result column="visit_id" jdbcType="INTEGER" property="visit_id" />
+   <result column="name" jdbcType="VARCHAR" property="name" />
+   <result column="exam_class" jdbcType="VARCHAR" property="exam_class" />
+   <result column="report_datetime" jdbcType="DATE" property="report_datetime" />
+   <result column="record" jdbcType="VARCHAR" property="record" />
+  </resultMap>
+  
+   <resultMap id="LabTestMasterMap" type="com.ronglian.ch.model.LabTestMaster">
+     <result column="test_no" jdbcType="VARCHAR" property="test_no" />
+     <result column="inpatient_no" jdbcType="VARCHAR" property="inpatient_no" />
+     <result column="outpatient_no" jdbcType="VARCHAR" property="outpatient_no" />
+     <result column="patient_id" jdbcType="VARCHAR" property="patient_id" />
+     <result column="visit_id" jdbcType="INTEGER" property="visit_id" />
+     <result column="spcm_sample_date_time" jdbcType="DATE" property="spcm_sample_date_time" />
+     <result column="specimen" jdbcType="VARCHAR" property="specimen" />
+     <result column="createby" jdbcType="VARCHAR" property="createby" />
+     <result column="createdate" jdbcType="DATE" property="createdate" />
+     <result column="updateby" jdbcType="VARCHAR" property="updateby" />
+     <result column="updatedate" jdbcType="DATE" property="updatedate" />
+     <result column="flag" jdbcType="INTEGER" property="flag" />
+   </resultMap>
+   
+   <resultMap id="LabResultMap" type="com.ronglian.ch.model.LabResult">
+     <result column="test_no" jdbcType="VARCHAR" property="test_no" />
+     <result column="item_no" jdbcType="VARCHAR" property="item_no" />
+     <result column="report_item_code" jdbcType="VARCHAR" property="report_item_code" />
+     <result column="report_item_name" jdbcType="VARCHAR" property="report_item_name" />
+     <result column="result" jdbcType="VARCHAR" property="result" />
+     <result column="units" jdbcType="VARCHAR" property="units" />
+     <result column="abnormal_indicator" jdbcType="VARCHAR" property="abnormal_indicator" />
+     <result column="createby" jdbcType="VARCHAR" property="createby" />
+     <result column="createdate" jdbcType="DATE" property="createdate" />
+     <result column="updateby" jdbcType="VARCHAR" property="updateby" />
+     <result column="updatedate" jdbcType="DATE" property="updatedate" />
+     <result column="flag" jdbcType="INTEGER" property="flag" />
+   </resultMap>
+  
+   <resultMap id="PatVisitMap" type="com.ronglian.ch.model.PatVisit">
+     <result column="inpatient_no" jdbcType="VARCHAR" property="inpatient_no" />
+     <result column="patient_id" jdbcType="VARCHAR" property="patient_id" />
+     <result column="visit_id" jdbcType="INTEGER" property="visit_id" />
+     <result column="dept_admission_to" jdbcType="VARCHAR" property="dept_admission_to" />
+     <result column="admission_date_time" jdbcType="DATE" property="admission_date_time" />
+     <result column="dept_discharge_from" jdbcType="VARCHAR" property="dept_discharge_from" />
+     <result column="discharge_date_time" jdbcType="DATE" property="discharge_date_time" />
+     <result column="marital_status" jdbcType="VARCHAR" property="marital_status" />
+     <result column="body_weight" jdbcType="NUMERIC" property="body_weight" />
+     <result column="body_height" jdbcType="NUMERIC" property="body_height" />
+     <result column="createby" jdbcType="VARCHAR" property="createby" />
+     <result column="createdate" jdbcType="DATE" property="createdate" />
+     <result column="updateby" jdbcType="VARCHAR" property="updateby" />
+     <result column="updatedate" jdbcType="DATE" property="updatedate" />
+     <result column="flag" jdbcType="INTEGER" property="flag" />
+   </resultMap>
+   
+   
+   
+     
+  <resultMap id="OutpMrClinicMasterMap" type="com.ronglian.ch.model.OutpMrClinicMaster">
+    <result column="NAME" jdbcType="VARCHAR" property="name" />
+    <result column="CLINIC_LABEL" jdbcType="VARCHAR" property="clinic_label" />
+    <result column="DOCTOR" jdbcType="VARCHAR" property="doctor" />
+    <result column="DEPT_ADMISSION" jdbcType="VARCHAR" property="dept_admission" />
+    <result column="VISIT_DATE" jdbcType="DATE" property="visit_date" />
+    <result column="VISIT_NO" jdbcType="INTEGER" property="visit_no" />
+    <result column="ILLNESS_DESC" jdbcType="VARCHAR" property="illness_desc" />
+    <result column="ANAMNESIS" jdbcType="VARCHAR" property="anamnesis" />
+    <result column="DIAG_DESC" jdbcType="VARCHAR" property="diag_desc" />
+  </resultMap>
+  
+  
+    <resultMap id="OutpMrMap" type="com.ronglian.ch.model.OutpMr">
+  <result column="id" jdbcType="VARCHAR" property="id" />
+  <result column="outpatient_no" jdbcType="VARCHAR" property="outpatient_no" />
+  <result column="patient_id" jdbcType="VARCHAR" property="patient_id" />
+  <result column="visit_date" jdbcType="DATE" property="visit_date" />
+  <result column="visit_no" jdbcType="INTEGER" property="visit_no" />
+  <result column="illness_desc" jdbcType="VARCHAR" property="illness_desc" />
+  <result column="anamnesis" jdbcType="VARCHAR" property="anamnesis" />
+  <result column="diag_desc" jdbcType="VARCHAR" property="diag_desc" />
+  <result column="createby" jdbcType="VARCHAR" property="createby" />
+  <result column="createdate" jdbcType="DATE" property="createdate" />
+  <result column="updateby" jdbcType="VARCHAR" property="updateby" />
+  <result column="updatedate" jdbcType="DATE" property="updatedate" />
+  <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+  
+   <!-- 查询患者基本信息page -->
+ <select id="listPagePatMasterIndex" parameterType="java.util.Map" resultMap="BaseResultMap" statementType="STATEMENT">
+		select * from pat_master_index where 1=1
+		<if test="pd.patient_id != null and pd.patient_id !=''">
+			and patient_id = '${pd.patient_id}'
+		</if>
+		<if test="pd.name != null and pd.name !=''">
+			AND (NAME LIKE CONCAT('%', '${pd.name}','%') OR NAME_PHONETIC LIKE CONCAT('%', '${pd.name}','%'))   
+		</if>
+ </select>
+	
+	<!-- 查询患者基本信息INFO -->
+ <select id="getPatMasterIndexInfo" parameterType="java.util.Map" resultMap="BaseResultMap" statementType="STATEMENT">
+		select * from pat_master_index where 1=1
+		<if test="patient_id != null and patient_id !=''">
+			and patient_id = '${patient_id}'
+		</if>
+ </select>
+ 
+ <!-- 查询联合门诊病例检查检验信息page -->
+ <select id="listPageExamReportExPacsReport1" parameterType="java.util.Map" resultMap="ExamReportExPacsReportMap" statementType="STATEMENT">
+			<![CDATA[
+					select 
+			m.ID,
+			m.INPATIENT_NO,
+			m.OUTPATIENT_NO,
+			m.PATIENT_ID,
+			m.VISIT_ID,
+			m.NAME,
+			m.EXAM_CLASS,
+			m.REPORT_DATETIME,
+			'ptjc' as 'record'
+			from EXAM_REPORT_EX m
+			WHERE 1 = 1
+    AND m.PATIENT_ID = '${pd.patient_id}'
+and m.OUTPATIENT_NO ='${pd.outpatient_no}'   
+			 UNION ALL SELECT
+			n.ID,
+			n.INPATIENT_NO,
+			n.OUTPATIENT_NO,
+			n.PATIENT_ID,
+			n.VISIT_ID,
+			n.NAME,
+			n.EXAM_CLASS,
+			n.REPORT_DATETIME,
+			'yxjc' AS 'record'
+			 FROM PACS_REPORT n
+			 WHERE 1 = 1
+			 AND n.PATIENT_ID = '${pd.patient_id}'
+and n.OUTPATIENT_NO ='${pd.outpatient_no}'  
+			 	]]> 
+ </select>
+ 
+ <!-- 查询联合住院检查检验信息page -->
+ <select id="listPageExamReportExPacsReport2" parameterType="java.util.Map" resultMap="ExamReportExPacsReportMap" statementType="STATEMENT">
+			<![CDATA[
+					select 
+			m.ID,
+			m.INPATIENT_NO,
+			m.OUTPATIENT_NO,
+			m.PATIENT_ID,
+			m.VISIT_ID,
+			m.NAME,
+			m.EXAM_CLASS,
+			m.REPORT_DATETIME,
+			'ptjc' as 'record'
+			from EXAM_REPORT_EX m
+			WHERE 1 = 1
+    AND m.PATIENT_ID = '${pd.patient_id}'
+and m.INPATIENT_NO ='${pd.inpatient_no}'   
+			 UNION ALL SELECT
+			n.ID,
+			n.INPATIENT_NO,
+			n.OUTPATIENT_NO,
+			n.PATIENT_ID,
+			n.VISIT_ID,
+			n.NAME,
+			n.EXAM_CLASS,
+			n.REPORT_DATETIME,
+			'yxjc' AS 'record'
+			 FROM PACS_REPORT n
+			 WHERE 1 = 1
+			 AND n.PATIENT_ID = '${pd.patient_id}'
+and n.INPATIENT_NO ='${pd.inpatient_no}'  
+			 	]]> 
+ </select>
+ 
+  <!-- 患者门诊检查page -->
+ <select id="listPageHzMzExamReportExPacsReport" parameterType="java.util.Map" resultMap="ExamReportExPacsReportMap" statementType="STATEMENT">
+			<![CDATA[
+		SELECT * FROM (SELECT 
+			m.ID,
+			m.INPATIENT_NO,
+			m.OUTPATIENT_NO,
+			m.PATIENT_ID,
+			m.VISIT_ID,
+			m.NAME,
+			m.EXAM_CLASS,
+			m.REPORT_DATETIME,
+			'ptjc' AS 'record'
+			FROM EXAM_REPORT_EX m
+			WHERE 1 = 1
+			 AND m.PATIENT_ID = '${pd.patient_id}'
+    AND (m.OUTPATIENT_NO != ''
+          OR m.INPATIENT_NO IS NULL)
+ORDER BY m.REPORT_DATETIME DESC ) t1
+			 UNION ALL
+SELECT * FROM 	(		 
+			  SELECT
+			n.ID,
+			n.INPATIENT_NO,
+			n.OUTPATIENT_NO,
+			n.PATIENT_ID,
+			n.VISIT_ID,
+			n.NAME,
+			n.EXAM_CLASS,
+			n.REPORT_DATETIME,
+			'yxjc' AS 'record'
+			 FROM PACS_REPORT n
+			 WHERE 1 = 1
+			 AND n.PATIENT_ID = '${pd.patient_id}'
+		  AND (n.OUTPATIENT_NO != ''
+          OR n.INPATIENT_NO IS NULL)
+ORDER BY n.REPORT_DATETIME DESC 
+) t2
+			 	]]> 
+ </select>
+ 
+ 
+   <!-- 患者住院检查page -->
+ <select id="listPageHzZyExamReportExPacsReport" parameterType="java.util.Map" resultMap="ExamReportExPacsReportMap" statementType="STATEMENT">
+			<![CDATA[
+		SELECT * FROM (SELECT 
+			m.ID,
+			m.INPATIENT_NO,
+			m.OUTPATIENT_NO,
+			m.PATIENT_ID,
+			m.VISIT_ID,
+			m.NAME,
+			m.EXAM_CLASS,
+			m.REPORT_DATETIME,
+			'ptjc' AS 'record'
+			FROM EXAM_REPORT_EX m
+			WHERE 1 = 1
+			 AND m.PATIENT_ID = '${pd.patient_id}'
+    AND (m.INPATIENT_NO != ''
+          OR m.OUTPATIENT_NO IS NULL)
+ORDER BY m.REPORT_DATETIME DESC ) t1
+			 UNION ALL
+SELECT * FROM 	(		 
+			  SELECT
+			n.ID,
+			n.INPATIENT_NO,
+			n.OUTPATIENT_NO,
+			n.PATIENT_ID,
+			n.VISIT_ID,
+			n.NAME,
+			n.EXAM_CLASS,
+			n.REPORT_DATETIME,
+			'yxjc' AS 'record'
+			 FROM PACS_REPORT n
+			 WHERE 1 = 1
+			 AND n.PATIENT_ID = '${pd.patient_id}'
+		  AND (n.INPATIENT_NO != ''
+          OR n.OUTPATIENT_NO IS NULL)
+ORDER BY n.REPORT_DATETIME DESC 
+) t2
+			 	]]> 
+ </select>
+ 
+  
+ 	<!-- 查询门诊病例检验信息主记录 -->
+ <select id="listPageLabTestMaster1" parameterType="java.util.Map" resultMap="LabTestMasterMap" statementType="STATEMENT">
+		select * from lab_test_master  where 1=1
+		<if test="pd.outpatient_no != null and pd.outpatient_no !=''">
+			and outpatient_no = '${pd.outpatient_no}'
+		</if>
+ </select>
+ 
+  	<!-- 患者-门诊检验 -->
+ <select id="listPageHzMzLabTestMaster" parameterType="java.util.Map" resultMap="LabTestMasterMap" statementType="STATEMENT">
+		SELECT * FROM LAB_TEST_MASTER WHERE 1 =1 AND (OUTPATIENT_NO != '' OR INPATIENT_NO IS NULL)
+		<if test="pd.patient_id != null and pd.patient_id !=''">
+			and patient_id = '${pd.patient_id}'
+		</if>
+ </select>
+ 
+ 
+  	<!-- 查询住院病例检验信息主记录 -->
+ <select id="listPageLabTestMaster2" parameterType="java.util.Map" resultMap="LabTestMasterMap" statementType="STATEMENT">
+		select * from lab_test_master  where 1=1
+		<if test="pd.inpatient_no != null and pd.inpatient_no !=''">
+			and inpatient_no = '${pd.inpatient_no}'
+		</if>
+ </select>
+ 
+   	<!-- 患者-住院检验 -->
+ <select id="listPageHzZyLabTestMaster" parameterType="java.util.Map" resultMap="LabTestMasterMap" statementType="STATEMENT">
+		SELECT * FROM LAB_TEST_MASTER WHERE INPATIENT_NO !='' OR OUTPATIENT_NO IS NULL 
+		<if test="pd.patient_id != null and pd.patient_id !=''">
+			and patient_id = '${pd.patient_id}'
+		</if>
+ </select>
+ 
+  	<!-- 查询门诊病例检验结果信息-->
+ <select id="listPageLabResult" parameterType="java.util.Map" resultMap="LabResultMap" statementType="STATEMENT">
+		select * from lab_result  where 1=1
+		<if test="pd.test_no != null and pd.test_no !=''">
+			and test_no = '${pd.test_no}'
+		</if>
+ </select>
+ 
+  	<!-- 查询门诊病例检验结果信息-->
+ <select id="listPageHzZyPatVisit" parameterType="java.util.Map" resultMap="PatVisitMap" statementType="STATEMENT">
+		select * from pat_visit  where 1=1
+		<if test="pd.patient_id != null and pd.patient_id !=''">
+			and patient_id = '${pd.patient_id}'
+		</if>
+ </select>
+ 
+ 	<!-- 查询住院信息INFO -->
+ <select id="getPatVisitInfo" parameterType="java.util.Map" resultMap="PatVisitMap" statementType="STATEMENT">
+		select * from pat_visit  where 1=1
+		<if test="id != null and id !=''">
+			and inpatient_no = '${id}'
+		</if>
+		<if test="inpatient_no != null and inpatient_no !=''">
+			and inpatient_no = '${inpatient_no}'
+		</if>
+		<if test="patient_id != null and patient_id !=''">
+			and patient_id = '${patient_id}'
+		</if>
+ </select>
+	
+	
+<select id="listPageOutpMrClinicMaster" parameterType="java.util.Map" resultMap="OutpMrClinicMasterMap" statementType="STATEMENT">
+		SELECT
+		  n.NAME,
+		  n.CLINIC_LABEL,
+		  n.DOCTOR,
+		  n.DEPT_ADMISSION,
+		  m.VISIT_DATE,
+		  m.VISIT_NO,
+		  m.ILLNESS_DESC,
+		  m.ANAMNESIS,
+		  m.DIAG_DESC
+		FROM outp_mr m,
+      clinic_master n
+    WHERE m.PATIENT_ID = n.PATIENT_ID
+        AND m.PATIENT_ID = '${pd.patient_id}'
+     </select>
+	
+	 <select id="getOutpMrInfo" parameterType="java.util.Map" resultMap="OutpMrMap" statementType="STATEMENT">
+		select * from outp_mr where 1=1
+		<if test="outpatient_no != null and outpatient_no !=''">
+			and outpatient_no = '${outpatient_no}'
+		</if>
+ </select>
+	
+	
+</mapper>

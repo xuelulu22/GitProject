@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PacsReportMapper">
+
+   <resultMap id="PacsReportMap" type="com.ronglian.ch.model.PacsReport">
+     <result column="id" jdbcType="VARCHAR" property="id" />
+     <result column="inpatient_no" jdbcType="VARCHAR" property="inpatient_no" />
+     <result column="outpatient_no" jdbcType="VARCHAR" property="outpatient_no" />
+     <result column="patient_id" jdbcType="VARCHAR" property="patient_id" />
+     <result column="visit_id" jdbcType="INTEGER" property="visit_id" />
+     <result column="name" jdbcType="VARCHAR" property="name" />
+     <result column="exam_class" jdbcType="VARCHAR" property="exam_class" />
+     <result column="report_diagnosis" jdbcType="VARCHAR" property="report_diagnosis" />
+     <result column="report_datetime" jdbcType="DATE" property="report_datetime" />
+     <result column="createby" jdbcType="VARCHAR" property="createby" />
+     <result column="createdate" jdbcType="DATE" property="createdate" />
+     <result column="updateby" jdbcType="VARCHAR" property="updateby" />
+     <result column="updatedate" jdbcType="DATE" property="updatedate" />
+     <result column="flag" jdbcType="INTEGER" property="flag" />
+  </resultMap>
+ 
+  <select id="doSelectPacsReportInfo" parameterType="java.util.Map" resultMap="PacsReportMap" statementType="STATEMENT" >
+		SELECT * FROM PACS_REPORT WHERE 1 = 1 
+		<if test="id != null and id !=''">
+			and id = '${id}'
+		</if>
+		<if test="patient_id != null and patient_id !=''">
+			and patient_id = '${patient_id}'
+		</if>
+		<if test="outpatient_no != null and outpatient_no !=''">
+			and outpatient_no = '${outpatient_no}'
+		</if>
+		<if test="inpatient_no != null and inpatient_no !=''">
+			and inpatient_no = '${inpatient_no}'
+		</if>
+		
+ </select>
+		
+</mapper>

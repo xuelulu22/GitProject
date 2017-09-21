@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ronglian.log.dao.LogDocErrorInfoMapper">
+    <resultMap id="BaseResultMap" type="LogDocErrorInfo">
+        <id column="ID" jdbcType="VARCHAR" property="id"/>
+        <result column="DOC_VERSION" jdbcType="VARCHAR" property="docVersion"/>
+        <result column="DOC_NAME" jdbcType="VARCHAR" property="docName"/>
+        <result column="DOC_CODE" jdbcType="VARCHAR" property="docCode"/>
+        <result column="DOC_TYPE_CODE" jdbcType="VARCHAR" property="docTypeCode"/>
+        <result column="DOC_TYPE_NAME" jdbcType="VARCHAR" property="docTypeName"/>
+        <result column="DOC_ORG_CODE" jdbcType="VARCHAR" property="docOrgCode"/>
+        <result column="DOC_UPLOAD_TYPE" jdbcType="VARCHAR" property="docUploadType"/>
+        <result column="DOC_UPLOAD_SYSTEM" jdbcType="VARCHAR" property="docUploadSystem"/>
+        <result column="DOC_XML" jdbcType="LONGVARBINARY" property="docXml"/>
+        <result column="IS_SOLVE" jdbcType="VARCHAR" property="isSolve"/>
+        <result column="DOC_UPLOAD_DATE" jdbcType="TIMESTAMP" property="docUploadDate"/>
+    </resultMap>
+    <select id="getLogDocErrorInfoById" resultMap="BaseResultMap">
+        SELECT
+            *
+        FROM
+             t_log_doc_error_info
+        WHERE            
+            ID = #{id,jdbcType=VARCHAR}
+    </select>
+    
+    <select id="findAllLogDocErrorInfo" resultMap="BaseResultMap">
+          SELECT * FROM t_log_doc_error_info 
+    </select>
+    
+    <delete id="deleteLogDocErrorInfo">
+        DELETE
+        FROM
+             t_log_doc_error_info
+        WHERE            
+            ID = #{id,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="saveLogDocErrorInfo" parameterType="LogDocErrorInfo" >
+        INSERT INTO t_log_doc_error_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null" >
+                ID,
+            </if>
+            <if test="docVersion != null" >
+                DOC_VERSION,
+            </if>
+            <if test="docName != null" >
+                DOC_NAME,
+            </if>
+            <if test="docCode != null" >
+                DOC_CODE,
+            </if>
+            <if test="docTypeCode != null" >
+                DOC_TYPE_CODE,
+            </if>
+            <if test="docTypeName != null" >
+                DOC_TYPE_NAME,
+            </if>
+            <if test="docOrgCode != null" >
+                DOC_ORG_CODE,
+            </if>
+            <if test="docUploadType != null" >
+                DOC_UPLOAD_TYPE,
+            </if>
+            <if test="docUploadSystem != null" >
+                DOC_UPLOAD_SYSTEM,
+            </if>
+            <if test="docXml != null" >
+                DOC_XML,
+            </if>
+            <if test="isSolve != null" >
+                IS_SOLVE,
+            </if>
+            <if test="docUploadDate != null" >
+                DOC_UPLOAD_DATE,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null" >
+                #{id,jdbcType=VARCHAR},
+            </if> 
+            <if test="docVersion != null" >
+                #{docVersion,jdbcType=VARCHAR},
+            </if> 
+            <if test="docName != null" >
+                #{docName,jdbcType=VARCHAR},
+            </if> 
+            <if test="docCode != null" >
+                #{docCode,jdbcType=VARCHAR},
+            </if> 
+            <if test="docTypeCode != null" >
+                #{docTypeCode,jdbcType=VARCHAR},
+            </if> 
+            <if test="docTypeName != null" >
+                #{docTypeName,jdbcType=VARCHAR},
+            </if> 
+            <if test="docOrgCode != null" >
+                #{docOrgCode,jdbcType=VARCHAR},
+            </if> 
+            <if test="docUploadType != null" >
+                #{docUploadType,jdbcType=VARCHAR},
+            </if> 
+            <if test="docUploadSystem != null" >
+                #{docUploadSystem,jdbcType=VARCHAR},
+            </if> 
+            <if test="docXml != null" >
+                #{docXml,jdbcType=LONGVARBINARY},
+            </if> 
+            <if test="isSolve != null" >
+                #{isSolve,jdbcType=VARCHAR},
+            </if> 
+            <if test="docUploadDate != null" >
+                #{docUploadDate,jdbcType=TIMESTAMP},
+            </if> 
+        </trim>
+    </insert>
+
+    <update id="updateLogDocErrorInfo" parameterType="LogDocErrorInfo" >
+        UPDATE t_log_doc_error_info
+        <set>
+            <if test="id != null" >
+                ID = #{id,jdbcType=VARCHAR},
+            </if>
+            <if test="docVersion != null" >
+                DOC_VERSION = #{docVersion,jdbcType=VARCHAR},
+            </if>
+            <if test="docName != null" >
+                DOC_NAME = #{docName,jdbcType=VARCHAR},
+            </if>
+            <if test="docCode != null" >
+                DOC_CODE = #{docCode,jdbcType=VARCHAR},
+            </if>
+            <if test="docTypeCode != null" >
+                DOC_TYPE_CODE = #{docTypeCode,jdbcType=VARCHAR},
+            </if>
+            <if test="docTypeName != null" >
+                DOC_TYPE_NAME = #{docTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="docOrgCode != null" >
+                DOC_ORG_CODE = #{docOrgCode,jdbcType=VARCHAR},
+            </if>
+            <if test="docUploadType != null" >
+                DOC_UPLOAD_TYPE = #{docUploadType,jdbcType=VARCHAR},
+            </if>
+            <if test="docUploadSystem != null" >
+                DOC_UPLOAD_SYSTEM = #{docUploadSystem,jdbcType=VARCHAR},
+            </if>
+            <if test="docXml != null" >
+                DOC_XML = #{docXml,jdbcType=LONGVARBINARY},
+            </if>
+            <if test="isSolve != null" >
+                IS_SOLVE = #{isSolve,jdbcType=VARCHAR},
+            </if>
+            <if test="docUploadDate != null" >
+                DOC_UPLOAD_DATE = #{docUploadDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        WHERE 
+            ID = #{id,jdbcType=VARCHAR}
+    </update>
+</mapper>

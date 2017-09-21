@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="PatMasterTimerMapper">
+
+  <resultMap id="BaseResultMap" type="com.ronglian.ch.model.PatMasterTimer">
+    <id column="ID" jdbcType="VARCHAR" property="id" />
+    <result column="PATIENT_ID" jdbcType="VARCHAR" property="patientId" />
+    <result column="TABLE_ID" jdbcType="VARCHAR" property="tableId" />
+    <result column="TABLE_NAME" jdbcType="VARCHAR" property="tableName" />
+    <result column="ABBRE_DESC" jdbcType="VARCHAR" property="abbreDesc" />
+    <result column="ABBRE_NAME" jdbcType="VARCHAR" property="abbreName" />
+    <result column="OPERATEDATE" jdbcType="TIMESTAMP" property="operatedate" />
+    <result column="CREATEDATE" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="UPDATEDATE" jdbcType="TIMESTAMP" property="updatedate" />
+    <result column="outpatient_no" jdbcType="VARCHAR" property="outpatient_no" />
+    <result column="inpatient_no" jdbcType="VARCHAR" property="inpatient_no" />
+  </resultMap>
+
+  
+	<!-- 获取患者时间轴事件的所有年份-->
+	<select id="getTimerYears" resultType="java.util.HashMap" parameterType="java.util.Map">
+		select DISTINCT DATE_FORMAT(OPERATEDATE,'%Y') AS YEAR from patient_master_timer 
+		where 1=1
+		<if test="_parameter.containsKey('PatientId')"> 
+			and PATIENT_ID = '${PatientId}'
+		</if>
+		<if test="_parameter.containsKey('outPatientId')"> 
+			and OUTPATIENT_NO = '${outPatientId}'
+		</if>
+		<if test="_parameter.containsKey('inPatientId')"> 
+			and INPATIENT_NO = '${inPatientId}'
+		</if>
+		<if test="_parameter.containsKey('order')"> 
+			order by OPERATEDATE ${order}
+		</if>
+	</select>
+	
+	<!-- 获取患者时间轴信息-->
+	<select id="getTimers" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select * from patient_master_timer where 1=1 
+		<if test="_parameter.containsKey('PatientId')"> 
+			and PATIENT_ID = '${PatientId}'
+		</if>
+		<if test="_parameter.containsKey('outPatientId')"> 
+			and OUTPATIENT_NO = '${outPatientId}'
+		</if>
+		<if test="_parameter.containsKey('inPatientId')"> 
+			and INPATIENT_NO = '${inPatientId}'
+		</if>
+		<if test="_parameter.containsKey('year')"> 
+			and DATE_FORMAT(OPERATEDATE ,'%Y') = '${year}' 
+		</if>
+		<if test="_parameter.containsKey('order')"> 
+			order by OPERATEDATE ${order}
+		</if>	
+	</select>
+</mapper>

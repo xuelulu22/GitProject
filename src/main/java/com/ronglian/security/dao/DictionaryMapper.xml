@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="DictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.ronglian.security.model.Dictionary">
+     <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="TEXT" property="text" jdbcType="VARCHAR" />
+    <result column="VALUE" property="value" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="ORDER_BY" property="orderBy" jdbcType="INTEGER" />
+    <result column="PID" property="pid" jdbcType="VARCHAR" />
+    <result column="flag" property="flag" jdbcType="VARCHAR" />
+  </resultMap>
+	<select id="listPageDictionary" parameterType="java.util.Map" resultMap="BaseResultMap" statementType="STATEMENT">
+		SELECT * FROM sys_dictionary where 1=1
+	</select>
+	
+	<select id="doSelectDictionaryIsExist" parameterType="java.util.Map" resultMap="BaseResultMap" statementType="STATEMENT">
+		SELECT * FROM sys_dictionary where 1=1 
+		<if test="id != null and id !=''">
+					and id = '${id}'
+		</if>
+		<if test="value != null and value !=''">
+					and value = '${value}'
+		</if>
+		<if test="type != null and type !=''">
+					and type = '${type}'
+		</if>
+	</select>
+	
+	 <insert id="insert" parameterType="com.ronglian.security.model.Dictionary">
+     <selectKey keyProperty="id" resultType="String" order="BEFORE">
+        select UUID() from dual
+    </selectKey>
+	    INSERT INTO sys_dictionary
+	            (ID,
+	             TEXT,
+	             VALUE,
+	             TYPE,
+	             REMARK,
+	             ORDER_BY,
+	             PID,
+	             FLAG)
+		VALUES (#{id,jdbcType=VARCHAR},
+		       #{text,jdbcType=VARCHAR},
+		        #{value,jdbcType=VARCHAR},
+		        #{type,jdbcType=VARCHAR},
+		        #{remark,jdbcType=VARCHAR},
+		        #{orderBy,jdbcType=TINYINT},
+		       0,
+		        0)
+  </insert>
+	
+</mapper>
